@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "MAVEN_HOME"
+    }
+
+    stages {
+        stage('Git-Clone') {
+            steps {
+                git 'https://github.com/jahirahmed/my-web-project2.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                bat "mvn clean package"
+            }
+        }        
+        stage('Deploy to Container') {
+            steps {
+                sshagent(['ec2-user']) {
+               // some block
+               bat "scp -o StrictHostKeyChecking=no target/*.war ec2-user@3.110.142.91:/home/ec2-user/tomcat/webapps"
+            }
+            }
+        }
+    }
+}
