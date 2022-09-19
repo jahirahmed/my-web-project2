@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello World! using Jenkins!Hello Arvind</h2>
+<h2>Hello World! using Declarative Pipeline!</h2>
 </body>
 </html>
